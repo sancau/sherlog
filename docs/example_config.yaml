@@ -20,8 +20,8 @@ postgresql:
   database: <your_db_name>
   user: <db username>
   password: <db password>
-  schema: union
-  table: logs
+  schema: logs
+  table: global
 
 # Optional monitor setup (example)
 ############################
