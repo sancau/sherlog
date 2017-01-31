@@ -3,8 +3,8 @@
 # in cases where Union is called from Python code.
 
 # General section (required by client)
-app: union
-level: debug
+app: union_example
+level: info
 stdout: true
 
 # Redis section (required by client and backend (worker))
