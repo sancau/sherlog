@@ -34,7 +34,8 @@ setup(
     install_requires=[
         'psycopg2==2.6.2',
         'redis==2.10.5',
-        'click==6.7'
+        'click==6.7',
+        'pyyaml==3.12'
     ],
     entry_points={
         'console_scripts': [
