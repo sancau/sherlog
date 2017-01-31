@@ -5,7 +5,7 @@
 ##### Union provides ability to aggregate, store and monitor logging messages from different Python applications and modules in real time.
 
 ## Getting started
-### 0. pip install union
+### pip install union
 
 ### 1. Using from Python application
 
