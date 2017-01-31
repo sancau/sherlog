@@ -3,13 +3,25 @@
 # in cases where Union is called from Python code.
 
 # General section (required by client)
-
+app: union_example
+level: debug
+stdout: true
 
 # Redis section (required by client and backend (worker))
-
+redis:
+  host: localhost
+  port: 6379
+  key: union
 
 # PostgreSQL section (required by backend (worker) and monitor)
-
+postgresql:
+  host: localhost
+  port: 5432
+  database: <db>
+  user: <user>
+  password: <password>
+  schema: logs
+  table: union_test
 
 # Optional monitor setup (example)
 ############################
