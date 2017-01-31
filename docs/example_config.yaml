@@ -1,0 +1,32 @@
+# UNION CONFIG EXAMPLE (YAML)
+# It is also possible to use JSON format or plain Python dict
+# in cases where Union is called from Python code.
+
+# General section (required by client)
+app: union
+level: debug
+stdout: true
+
+# Redis section (required by client and backend (worker))
+redis:
+  host: localhost
+  port: 6379
+  key: union
+
+# PostgreSQL section (required by backend (worker) and monitor)
+postgresql:
+  host: localhost
+  port: 5432
+  database: <your_db_name>
+  user: <db username>
+  password: <db password>
+  schema: union
+  table: logs
+
+# Optional monitor setup (example)
+############################
+# filters:
+#   apps: [union]  # show only the apps from list
+#   fields: [app, timestamp]  # show only the fields from list in the order defined
+#   types: [error, debug]  # show only the types from list
+#   loggers: [root]  # show only the loggers from list
