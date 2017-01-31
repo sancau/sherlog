@@ -4,10 +4,10 @@
 ##### Based on Redis and PostgreSQL. Requires almost zero configuration.
 ##### Union provides ability to aggregate, store and monitor logging messages from different Python applications and modules in real time.
 
-#### Getting started
-- pip install union
+## Getting started
+#### pip install union
 
-1. Using from Python application
+### 1. Using from Python application
 
 ``` python
 import union
@@ -54,3 +54,18 @@ It will also add the application name that we defined in the config above.
   in advance for future extensions and should not be used.
   
 - Note: Another limitation of version (0.1.1): Python logging 'extra' kwag is not supported yet.
+
+From here you can use the logger exactly you would use Python default logger:
+
+```python
+log.debug('Starting the party...')
+log.info('Party in progress.')
+log.warning('Guest numer %s is too drunk', 42)
+log.error('Out of beer.', stack_info=True)
+log.critical('Wookie in the house!')
+try:
+    if wookie_in_the_house:
+        raise WookieInTheHouse('Big wookie!!!')
+except WookieInTheHouse as e:
+    log.exception(e)
+```
