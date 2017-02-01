@@ -69,3 +69,45 @@ try:
 except WookieInTheHouse as e:
     log.exception(e)
 ```
+
+### 2. Union worker (REDIS to PostgreSQL layer)
+
+Now then you know how to plug in Union into your Python application it is time to 
+make the logs actually being forwarded to PostgreSQL.
+
+Union provides simple CLI tool to start up a worker (or many workers) 
+in a separate process (or even from remote machine).
+
+The config the woker will expect can be specified as a YAML or JSON file. 
+Here is an example of YAML config:
+
+``` yaml
+redis:
+  host: localhost
+  port: 6379
+  key: union
+ 
+postgresql:
+  host: localhost
+  port: 5432
+  database: <your db name>
+  user: <username>
+  password: <password>
+  schema: union 
+  table: logs
+```
+
+To start the worker instance simply run in the console:
+
+```shell
+union worker -c <path_to_your_cofig_file>
+```
+The worker will look for specified schema and table in the PostgreSQL DB and if need will 
+automaticaly create the schema and table of required structure. 
+
+NOTE: All the user input related to the PostgreSQL will be sanitized to prevent possible SQL injection.
+
+After the worker is done with all the connections and preparations you should see a success message. 
+The worker will be monitoring the specified REDIS instance and key.
+Then the message will be recieved from REDIS the worker will insert the event to the specified PostgreSQL schema/table.
+
