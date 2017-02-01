@@ -113,6 +113,7 @@ When the message will be recieved from REDIS the worker will insert the event to
 Under the hood Union uses REDIS lpush - brpop to ensure that every message will be inserted just once even
 if you are using multiple instances of workers (if one is not enough to process all the incoming messages from your apps).
 
-### 3. Union monitor
+### 3. Union monitor CLI
 
+#### coming soon...
 
