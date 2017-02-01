@@ -109,5 +109,10 @@ NOTE: All the user input related to the PostgreSQL will be sanitized to prevent 
 
 After the worker is done with all the connections and preparations you should see a success message. 
 The worker will be monitoring the specified REDIS instance and key.
-Then the message will be recieved from REDIS the worker will insert the event to the specified PostgreSQL schema/table.
+When the message will be recieved from REDIS the worker will insert the event to the specified PostgreSQL schema/table.
+Under the hood Union uses REDIS lpush - brpop to ensure that every message will be inserted just once even
+if you are using multiple instances of workers (if one is not enough to process all the incoming messages from your apps).
+
+### 3. Union monitor
+
 
