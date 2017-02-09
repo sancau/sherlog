@@ -1,9 +1,9 @@
-# UNION CONFIG EXAMPLE (YAML)
+# SHERLOG CONFIG EXAMPLE (YAML)
 # It is also possible to use JSON format or plain Python dict
-# in cases where Union is called from Python code.
+# in cases where Sherlog is called from Python code.
 
 # General section (required by client)
-app: union_example
+app: sherlog_example
 level: debug
 stdout: true
 
@@ -11,7 +11,7 @@ stdout: true
 redis:
   host: localhost
   port: 6379
-  key: union
+  key: sherlog
 
 # PostgreSQL section (required by backend (worker) and monitor)
 postgresql:
@@ -21,12 +21,12 @@ postgresql:
   user: <user>
   password: <password>
   schema: logs
-  table: union_test
+  table: sherlog_test
 
 # Optional monitor setup (example)
 ############################
 # filters:
-#   apps: [union]  # show only the apps from list
-#   fields: [app, timestamp]  # show only the fields from list in the order defined
-#   types: [error, debug]  # show only the types from list
-#   loggers: [root]  # show only the loggers from list
+#   apps: [sherlog]  # show only the apps from list
+#   fields: [app, ts, lvl, message, ex_type]  # show only the fields from list in the order defined
+#   levels: [error, warning, info]  # show only the levels from list
+#   loggers: [root, rest_api_logger]  # show only the loggers from list

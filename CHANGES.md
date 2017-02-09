@@ -2,6 +2,47 @@
 
 - Initial "MVP" version
 
+
 ### 0.1.1
 
 - Added PyYAML as a package dependency
+
+
+### 0.1.2
+
+- Project renamed to "Sherlog"
+
+- Exception type in the monitor CLI is not renders in upper case
+
+- Exception type and exception repr are now separated text fields in the DB
+
+- Stacktrace is not a separated text field in the DB
+
+- Thead ID and Process ID are not field of type BIGINT in DB
+  Line is now of type INTEGER in DB
+
+- Some DB field names is shorter now, type renamed to lvl (message level), changed some data types
+
+    id       SERIAL NOT NULL PRIMARY KEY
+    app      TEXT NOT NULL
+    ts       TIMESTAMP NOT NULL
+    ts_rel   INTEGER DEFAULT NULL
+    lvl      TEXT NOT NULL
+    message  TEXT DEFAULT NULL
+    module   TEXT DEFAULT NULL
+    function TEXT DEFAULT NULL
+    line     INTEGER DEFAULT NULL
+    path     TEXT DEFAULT NULL
+    file     TEXT DEFAULT NULL
+    pid      BIGINT DEFAULT NULL
+    pname    TEXT DEFAULT NULL
+    tid      BIGINT DEFAULT NULL
+    tname    TEXT DEFAULT NULL
+    logger   TEXT DEFAULT NULL
+    ex_type  TEXT DEFAULT NULL
+    ex_repr  TEXT DEFAULT NULL
+    stack    TEXT DEFAULT NULL
+
+- filter -> types from monitor config renamed to filter -> levels
+
+- Some minor changes to monitor output styling for better readability ('\n' after exceptions, etc)
