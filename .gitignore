@@ -1,6 +1,11 @@
+conf
+test
+build
+
 venv
 __pycache__/
 build
 dist
 sherlog.egg-info
 .idea
+dev

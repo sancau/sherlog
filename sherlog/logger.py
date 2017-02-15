@@ -3,6 +3,7 @@
 import json
 import logging
 import os
+import traceback
 import sys
 
 from datetime import datetime
@@ -38,7 +39,7 @@ class SherlogHandler(Handler):
             json_entry = json.dumps(log_entry)
             self.redis.lpush(self.key, json_entry)
         except Exception as e:
-            print(e)  # TODO logging
+            print(e, traceback.format_exc())  # TODO logging
 
 
 class SherlogFormatter(Formatter):
@@ -87,7 +88,7 @@ class SherlogFormatter(Formatter):
         if record.exc_info:
             data['ex_type'] = record.exc_info[0].__name__,  # type of exception (class name)
             data['ex_repr'] = self.formatException(record.exc_info)
-        if record.stack_info:
+        if getattr(record, 'stack_info', None):  # python 2.7 LogRecord has no stack_info attr
             data['stack'] = self.formatStack(record.stack_info)
 
         return data
