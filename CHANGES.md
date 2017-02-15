@@ -56,3 +56,9 @@
 ### 0.1.4
 
 - Few fixes on Python 2.7 support (unicode issue, stack_info key error)
+
+
+### 0.1.5
+
+- Fixed critical bug in worker
+
