@@ -57,7 +57,11 @@ class SherlogFormatter(Formatter):
 
     def format_message(self, record):
         if self.format_style == '%':
-            return str(record.msg) % record.args
+            try:
+                # TODO this might be an overhead (compare Python 2 / 3 logging)
+                return str(record.msg) % record.args
+            except UnicodeEncodeError:
+                return record.msg % record.args
         else:
             raise NotImplementedError('Unexpected formatting style.')
 
