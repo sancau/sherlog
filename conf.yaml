@@ -1,0 +1,17 @@
+app: sherlog_dev_test
+stdout: true
+level: debug
+
+redis:
+  host: 10.201.3.139
+  port: 6379
+  key: sherlog_dev
+
+postgresql:
+  host: 10.201.3.139
+  port: 5432
+  database: toolsdep
+  user: tatchin.a.v
+  password: secret
+  schema: logs
+  table: dev_sherlog
