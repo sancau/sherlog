@@ -8,14 +8,13 @@ import json
 
 from redis import StrictRedis
 
-from sherlog.config import SherlogBackendConfig
 from sherlog.postgresql import PostgresqlBackend
 
 
-class SherlogWorker:
+class SherlogWorker(object):
     """A Redis => DB worker"""
 
-    def __init__(self, *, backend, config: SherlogBackendConfig, blocking_timeout=1):
+    def __init__(self, backend, config, blocking_timeout=1):
         backend_map = {
             'psql': PostgresqlBackend,
         }

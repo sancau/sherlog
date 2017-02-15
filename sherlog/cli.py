@@ -70,7 +70,7 @@ def worker(backend, config):
 def monitor(backend, config):
     """Sherlog global monitor CLI"""
 
-    def echo_event(e: dict, cfg: SherlogMonitorConfig, separator: str):
+    def echo_event(e, cfg, separator):
         color_map = {
             '[D]': 'white',
             '[I]': 'green',
@@ -114,7 +114,7 @@ def monitor(backend, config):
             click.echo(stack)
             click.echo('\n')
 
-    def filtered(e, cfg: SherlogMonitorConfig):
+    def filtered(e, cfg):
         return not all([
             e['app'] in cfg.filters.apps if cfg.filters.apps is not None else True,
             e['lvl'] in cfg.filters.levels if cfg.filters.levels is not None else True,
@@ -129,6 +129,7 @@ def monitor(backend, config):
         config.postgresql.host, config.postgresql.port,
         config.postgresql.database, '{}_{}_updates'.format(config.postgresql.schema,
                                                            config.postgresql.table)), fg='green')
+    click.echo('\n')
 
     for event in SherlogMonitor(config=config).listen():
         if not filtered(event, config):

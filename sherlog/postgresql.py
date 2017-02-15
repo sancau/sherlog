@@ -1,13 +1,10 @@
 # coding=utf-8
 
-import json
 import psycopg2
 
-from sherlog.config import SherlogBackendConfig
 
-
-class PostgresqlBackend:
-    def __init__(self, config: SherlogBackendConfig):
+class PostgresqlBackend(object):
+    def __init__(self, config):
         conn = psycopg2.connect(host=config.postgresql.host,
                                 port=config.postgresql.port,
                                 database=config.postgresql.database,

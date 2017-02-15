@@ -3,6 +3,8 @@
 import json
 import yaml
 
+from io import open
+
 from collections import namedtuple
 
 
@@ -18,14 +20,14 @@ SherlogMonitorFilterConfig = namedtuple('SherlogMonitorFilterConfig', ['apps', '
                                                                        'levels', 'loggers'])
 
 
-class SherlogConfig:
+class SherlogConfig(object):
     """Base class for Sherlog configuration"""
 
-    def __init__(self, dict_config: dict):
+    def __init__(self, dict_config):
         self.validate(dict_config)
 
     @staticmethod
-    def validate(dict_config: dict):
+    def validate(dict_config):
         raise NotImplementedError
 
     @staticmethod
@@ -34,13 +36,13 @@ class SherlogConfig:
                                                                              'update', 'create']
 
     @classmethod
-    def from_json(cls, filepath: str, encoding='UTF8'):
+    def from_json(cls, filepath, encoding='UTF8'):
         with open(filepath, encoding=encoding) as f:
             dict_config = json.loads(f.read())
         return cls(dict_config=dict_config)
 
     @classmethod
-    def from_yaml(cls, filepath: str, encoding='UTF8'):
+    def from_yaml(cls, filepath, encoding='UTF8'):
         with open(filepath, encoding=encoding) as f:
             dict_config = yaml.load(f.read())
         return cls(dict_config=dict_config)
@@ -49,7 +51,7 @@ class SherlogConfig:
 class SherlogClientConfig(SherlogConfig):
     """Configuration to initialize python logger"""
 
-    def __init__(self, dict_config: dict):
+    def __init__(self, dict_config):
         super(SherlogClientConfig, self).__init__(dict_config)
 
         self.redis = SherlogRedisConfig(dict_config['redis']['host'],
@@ -61,14 +63,14 @@ class SherlogClientConfig(SherlogConfig):
         self.stdout = dict_config['stdout']
 
     @staticmethod
-    def validate(dict_config: dict):
+    def validate(dict_config):
         return True  # TODO validation using Validoll
 
 
 class SherlogBackendConfig(SherlogConfig):
     """Configuration for Sherlog worker"""
 
-    def __init__(self, dict_config: dict):
+    def __init__(self, dict_config):
         super(SherlogBackendConfig, self).__init__(dict_config)
 
         self.redis = SherlogRedisConfig(dict_config['redis']['host'],
@@ -84,7 +86,7 @@ class SherlogBackendConfig(SherlogConfig):
                                                   dict_config['postgresql']['table'])
 
     @staticmethod
-    def validate(dict_config: dict):
+    def validate(dict_config):
         if 'postgresql' not in dict_config:
             raise ValueError('PostgreSQL config required.')
 
@@ -103,7 +105,7 @@ class SherlogBackendConfig(SherlogConfig):
 class SherlogMonitorConfig(SherlogConfig):
     """Configuration for Sherlog monitor"""
 
-    def __init__(self, dict_config: dict):
+    def __init__(self, dict_config):
         super(SherlogMonitorConfig, self).__init__(dict_config)
 
         self.postgresql = SherlogPostgresqlConfig(dict_config['postgresql']['host'],
@@ -126,7 +128,7 @@ class SherlogMonitorConfig(SherlogConfig):
             self.filters = SherlogMonitorFilterConfig(None, None, None, None)
 
     @staticmethod
-    def validate(dict_config: dict):
+    def validate(dict_config):
         if 'postgresql' not in dict_config:
             raise ValueError('PostgreSQL config required.')
 

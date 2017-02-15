@@ -27,7 +27,7 @@ LVL_MAP = {
 class SherlogHandler(Handler):
     """Handler meant to use REDIS lpush rpop pattern
     """
-    def __init__(self, redis: StrictRedis, key: str):
+    def __init__(self, redis, key):
         self.redis = redis
         self.key = key
         super(SherlogHandler, self).__init__()
@@ -44,7 +44,7 @@ class SherlogHandler(Handler):
 class SherlogFormatter(Formatter):
     """Sherlog sherlog formatter. Performs log event pre processing.
     """
-    def __init__(self, *, app: str, format_style='%'):
+    def __init__(self, app, format_style='%'):
         supported_styles = ['%', ]
         if format_style not in supported_styles:
             raise ValueError('Given format style is not supported.')
@@ -93,7 +93,7 @@ class SherlogFormatter(Formatter):
         return data
 
 
-def set_logger(name=None, *, config, format_style='%', extra_handlers=None):  # TODO more f.
+def set_logger(config, name=None, format_style='%', extra_handlers=None):  # TODO more f.
     # styles
     """Initializes sherlog logger configuration"""
     logger = logging.getLogger(name)

@@ -46,3 +46,8 @@
 - filter -> types from monitor config renamed to filter -> levels
 
 - Some minor changes to monitor output styling for better readability ('\n' after exceptions, etc)
+
+
+### 0.1.3
+
+- Sherlog is now compatible with Python 2.7 (therefore type annotations in source code removed)

@@ -6,11 +6,9 @@ import json
 import select
 import psycopg2
 
-from sherlog.config import SherlogMonitorConfig
 
-
-class SherlogMonitor:
-    def __init__(self, *, config: SherlogMonitorConfig):
+class SherlogMonitor(object):
+    def __init__(self, config):
         self.config = config
 
     def listen(self):
