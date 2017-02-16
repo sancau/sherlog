@@ -24,13 +24,13 @@ config = {
   }
 }
 
-log = sherlog.set_logger('MyLoggerName', config=config)  # if no name was passed the 'root' logger will be returned
+log = sherlog.set_logger(config, name='MyLoggerName')  # if no name was passed the 'root' logger will be returned
 ```
 
 set_logger() signature: 
 
 ```python
-set_logger(name=None, *, config, format_style='%', extra_handlers=None)
+set_logger(config, name=None, format_style='%', extra_handlers=None)
 ```
 
 The object returned by sherlog.set_logger() is an instance of Python logger.
