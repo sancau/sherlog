@@ -5,6 +5,8 @@
 # coding=utf-8
 
 import json
+import traceback
+import sys
 
 from redis import StrictRedis
 
@@ -33,7 +35,12 @@ class SherlogWorker(object):
         data = self.redis.brpop(self.redis_key, self.blocking_timeout)
         if data:
             try:
-                event = json.loads(str(data[1], encoding='UTF8'))
+                if int(sys.version[0]) == 3:  # python 2.7 compatibility stuff
+
+                    event = json.loads(str(data[1], encoding='utf-8'))
+                else:
+                    event = json.loads(str(data[1]).encode('utf-8'))
+
                 self.backend.insert_event(event)
             except Exception as e:
-                print(e)  # TODO
+                print(e, traceback.format_exc())  # TODO logging

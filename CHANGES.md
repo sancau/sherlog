@@ -51,3 +51,14 @@
 ### 0.1.3
 
 - Sherlog is now compatible with Python 2.7 (therefore type annotations in source code removed)
+
+
+### 0.1.4
+
+- Few fixes on Python 2.7 support (unicode issue, stack_info key error)
+
+
+### 0.1.5
+
+- Fixed critical bug in worker
+
