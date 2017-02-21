@@ -62,3 +62,11 @@
 
 - Fixed critical bug in worker
 
+
+### 0.1.6
+
+- Fixed issue with log messages that contains formatting symbols such as '%' or {}
+- format_style kwarg was removed from the sherlog.set_logger() signature
+
+
+

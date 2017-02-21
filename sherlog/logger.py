@@ -45,25 +45,17 @@ class SherlogHandler(Handler):
 class SherlogFormatter(Formatter):
     """Sherlog sherlog formatter. Performs log event pre processing.
     """
-    def __init__(self, app, format_style='%'):
-        supported_styles = ['%', ]
-        if format_style not in supported_styles:
-            raise ValueError('Given format style is not supported.')
-
+    def __init__(self, app):
         self.app = app
-        self.format_style = format_style
-
         super(SherlogFormatter, self).__init__()
 
-    def format_message(self, record):
-        if self.format_style == '%':
-            try:
-                # TODO this might be an overhead (compare Python 2 / 3 logging)
-                return str(record.msg) % record.args
-            except UnicodeEncodeError:
-                return record.msg % record.args
-        else:
-            raise NotImplementedError('Unexpected formatting style.')
+    @staticmethod
+    def format_message(record):
+        try:
+            # TODO this might be an overhead (compare Python 2 / 3 logging)
+            return str(record.getMessage())  # % record.args
+        except UnicodeEncodeError:
+            return record.getMessage()  # % record.args
 
     def format(self, record):
         ts = datetime.fromtimestamp(record.created).isoformat()
@@ -98,8 +90,7 @@ class SherlogFormatter(Formatter):
         return data
 
 
-def set_logger(config, name=None, format_style='%', extra_handlers=None):  # TODO more f.
-    # styles
+def set_logger(config, name=None, extra_handlers=None):  # TODO more styles
     """Initializes sherlog logger configuration"""
     logger = logging.getLogger(name)
 
@@ -126,7 +117,7 @@ def set_logger(config, name=None, format_style='%', extra_handlers=None):  # TOD
 
     redis = StrictRedis(host=config.redis.host, port=config.redis.port)
     handler = SherlogHandler(redis, config.redis.key)
-    formatter = SherlogFormatter(app=app, format_style=format_style)
+    formatter = SherlogFormatter(app=app)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 

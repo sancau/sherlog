@@ -30,7 +30,7 @@ log = sherlog.set_logger(config, name='MyLoggerName')  # if no name was passed t
 set_logger() signature: 
 
 ```python
-set_logger(config, name=None, format_style='%', extra_handlers=None)
+set_logger(config, name=None, extra_handlers=None)
 ```
 
 The object returned by sherlog.set_logger() is an instance of Python logger.
@@ -50,10 +50,7 @@ It will also add the application name that we defined in the config above.
 - Note: You can add arbitrary number of custom handlers along with Sherlog handler by passing them to
   extra_handlers key-value argument.
 
-- Note: In the current version (0.1.5) only '%' formatting style is supported. format_style argument is added
-  in advance for future extensions and should not be used.
-  
-- Note: Another limitation of version (0.1.5): Python logging 'extra' kwag is not supported yet.
+- Note: There is a limitation in version (0.1.6): Python logging 'extra' kwag is not supported yet.
 
 From here you can use the logger exactly you would use Python default logger:
 

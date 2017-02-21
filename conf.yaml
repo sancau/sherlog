@@ -5,7 +5,7 @@ level: debug
 redis:
   host: 10.201.3.139
   port: 6379
-  key: sherlog_dev
+  key: temp
 
 postgresql:
   host: 10.201.3.139
@@ -14,4 +14,4 @@ postgresql:
   user: tatchin.a.v
   password: secret
   schema: logs
-  table: dev_sherlog
+  table: temp
