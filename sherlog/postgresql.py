@@ -60,7 +60,7 @@ class PostgresqlBackend(object):
     @property
     def create_function_query(self):
         return """
-        create or replace function {schema}_{table}_notify_func() returns trigger as $$
+        create or replace function {schema}.{schema}_{table}_notify_func() returns trigger as $$
             begin
                 perform pg_notify(CAST('{schema}_{table}_updates' as text), row_to_json(new)::text);
                 return new;
@@ -87,7 +87,7 @@ class PostgresqlBackend(object):
         schema_exists = self.cursor.fetchone()[0]
 
         if not schema_exists:
-            self.cursor.execute(self.create_schema_query)       
+            self.cursor.execute(self.create_schema_query)
 
     def create_table(self):
         self.cursor.execute("""

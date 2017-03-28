@@ -58,9 +58,10 @@ class SherlogClientConfig(SherlogConfig):
                                         dict_config['redis']['port'],
                                         dict_config['redis']['key'])
 
-        self.app = dict_config['app']
-        self.level = dict_config['level']
-        self.stdout = dict_config['stdout']
+        self.app = dict_config.get('app', 'undefined_application')
+        self.level = dict_config.get('level', 'debug')
+        self.stdout = dict_config.get('stdout', False)
+        self.dummy = dict_config.get('dummy', False)
 
     @staticmethod
     def validate(dict_config):

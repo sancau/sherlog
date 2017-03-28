@@ -115,11 +115,12 @@ def set_logger(config, name=None, extra_handlers=None):  # TODO more styles
     logger_level = LVL_MAP[config.level.lower()]
     logger.setLevel(logger_level)
 
-    redis = StrictRedis(host=config.redis.host, port=config.redis.port)
-    handler = SherlogHandler(redis, config.redis.key)
-    formatter = SherlogFormatter(app=app)
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+    if not config.dummy:
+        redis = StrictRedis(host=config.redis.host, port=config.redis.port)
+        handler = SherlogHandler(redis, config.redis.key)
+        formatter = SherlogFormatter(app=app)
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
 
     if config.stdout:
         # enables stdout logging

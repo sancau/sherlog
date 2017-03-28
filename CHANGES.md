@@ -69,4 +69,10 @@
 - format_style kwarg was removed from the sherlog.set_logger() signature
 
 
+### 0.1.7
 
+- Sherlog now creates functions in DB within the defined schema and not in public schema
+- Added new parameter to client config main section. If 'dummy' is true, then no Redis handler
+  will be attached to the logger. It may be a good idea during development, when you don't
+  want to spam logs to Redis instance and DB while debug locally but still want to keep your
+  code base as if Sherlog is there.

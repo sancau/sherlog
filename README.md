@@ -16,6 +16,8 @@ config = {
   'app': 'sherlog_example'  # your application name
   'level': 'debug',  # top level for logging (look Python logging module documentation for details)
   'stdout': True  # if True then default StreamHandler will be added (to see logging in your app stdout)
+  'dummy': False  # if True then no Redis handler will be attached to Sherlog logger (dummy mode
+  may useful during development)
 
   'redis': {
     'host': localhost,  

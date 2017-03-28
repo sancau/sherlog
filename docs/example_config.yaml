@@ -6,6 +6,7 @@
 app: sherlog_example
 level: debug
 stdout: true
+dummy: false
 
 # Redis section (required by client and backend (worker))
 redis:
