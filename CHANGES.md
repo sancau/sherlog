@@ -76,3 +76,8 @@
   will be attached to the logger. It may be a good idea during development, when you don't
   want to spam logs to Redis instance and DB while debug locally but still want to keep your
   code base as if Sherlog is there.
+
+
+### 0.1.8
+
+- Project dependecies versions are not strictly fixed anymore
